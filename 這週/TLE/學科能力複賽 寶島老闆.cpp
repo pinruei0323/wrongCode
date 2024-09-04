@@ -44,7 +44,7 @@ void write(ll a, ll b, auto &data, ll &n, ll &m)
 }
 
 int main()    //    https://zerojudge.tw/ShowProblem?problemid=c520
-{
+{//這題就是看也知道我的作法不行, 時間複雜度會爆, 就幫我看看有沒有想到什麼好方法吧！！！！
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
