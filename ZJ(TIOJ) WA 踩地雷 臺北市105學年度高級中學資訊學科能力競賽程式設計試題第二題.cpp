@@ -54,22 +54,22 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
                 {
                     ll a=que.front().first, b=que.front().second;
                     que.pop();
-                    if(a-1>=0 && data[a-1][b])
+                    if(a-1>=0 && data[a-1][b])//上
                     {
                         data[a-1][b] = 0;
                         que.push({a-1, b});
                     }
-                    if(a+1<n && data[a+1][b])
+                    if(a+1<n && data[a+1][b])//下
                     {
                         data[a+1][b] = 0;
                         que.push({a+1, b});
                     }
-                    if(b-1>=0 && data[a][b-1])
+                    if(b-1>=0 && data[a][b-1])//左
                     {
                         data[a][b-1] = 0;
                         que.push({a, b-1});
                     }
-                    if(b+1<m && data[a][b+1])
+                    if(b+1<m && data[a][b+1])//右
                     {
                         data[a][b+1] = 0;
                         que.push({a, b+1});
