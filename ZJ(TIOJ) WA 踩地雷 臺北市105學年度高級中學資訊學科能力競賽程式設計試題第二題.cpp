@@ -30,10 +30,10 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
         cin >> a >> b;
         a--;
         b--;
-        for(ll j=max(0, a-2); j<min(n, a+3); j++)
+        bool ok = 0;
+        for(ll j=max((ll)0, a-2); j<min(n, a+3); j++)
         {
-            bool ok = 0;
-            for(ll k=max(0, b-2); k<min(m, b+3); k++)
+            for(ll k=max((ll)0, b-2); k<min(m, b+3); k++)
             {
                 if(data[j][k])
                 {
