@@ -30,21 +30,33 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
         cin >> a >> b;
         a--;
         b--;
-        bool ok = 0;
-        for(ll j=max((ll)0, a-2); j<min(n, a+3); j++)
-        {
-            for(ll k=max((ll)0, b-2); k<min(m, b+3); k++)
-            {
-                if(data[j][k])
-                {
-                    ok = 1;
-                    break;
-                }
-            }
-            if(ok)    break;
-        }
-        if(!ok)    ans++;
         data[a][b] = 1;
+    }
+    f2(i, n)
+    {
+        f2(j, m)
+        {
+            if(!data[i][j])    continue;
+            ans++;
+            queue <pair <ll, ll>> que;
+            que.push({i, j});
+            while(!que.empty())
+            {
+                ll a=que.front().first, b=que.front().second;
+                for(ll k=max((ll)0, a-2); k<min(n, a+3); k++)
+                {
+                    for(ll l=max((ll)0, b-2); l<min(m, b+3); l++)
+                    {
+                        if(data[k][l])
+                        {
+                            data[k][l] = 0;
+                            que.push({k, l});
+                        }
+                    }
+                }
+                que.pop();
+            }
+        }
     }
     cout << ans;
     return 0;
