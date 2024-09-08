@@ -23,60 +23,28 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
     cout.tie(0);
     ll n, m, c, ans=0;
     cin >> n >> m >> c;
-    vector <vector <bool>> data(n, vector <bool> (m));//1表示為炸彈or炸彈感應區
+    vector <vector <bool>> data(n, vector <bool> (m));
     f2(i, c)
     {
         ll a, b;
         cin >> a >> b;
-        a--;//這兩行讓a, b都變成索引值
+        a--;
         b--;
-        data[a][b] = 1;
-        if(a-1>=0)    data[a-1][b] = 1;//line34-41 : 判斷感應區是否越界
-        if(a+1<n)    data[a+1][b] = 1;
-        if(b-1>=0)    data[a][b-1] = 1;
-        if(b+1<m)    data[a][b+1] = 1;
-        if(a-1>=0 && b-1>=0)    data[a-1][b-1] = 1;
-        if(a-1>=0 && b+1<m)    data[a-1][b+1] = 1;
-        if(a+1<n && b+1<m)    data[a+1][b+1] = 1;
-        if(a+1<n && b-1>=0)    data[a+1][b-1] = 1;
-    }
-    f2(i, n)
-    {
-        f2(j, m)
+        for(ll j=max(0, a-2); j<min(n, a+3); j++)
         {
-            if(data[i][j])
+            bool ok = 0;
+            for(ll k=max(0, b-2); k<min(m, b+3); k++)
             {
-                ans++;//ans為聯通塊數量
-                queue <pair<ll, ll>> que;//bfs
-                que.push({i, j});
-                data[i][j] = 0;
-                while(!que.empty())
+                if(data[j][k])
                 {
-                    ll a=que.front().first, b=que.front().second;
-                    que.pop();
-                    if(a-1>=0 && data[a-1][b])//上
-                    {
-                        data[a-1][b] = 0;
-                        que.push({a-1, b});
-                    }
-                    if(a+1<n && data[a+1][b])//下
-                    {
-                        data[a+1][b] = 0;
-                        que.push({a+1, b});
-                    }
-                    if(b-1>=0 && data[a][b-1])//左
-                    {
-                        data[a][b-1] = 0;
-                        que.push({a, b-1});
-                    }
-                    if(b+1<m && data[a][b+1])//右
-                    {
-                        data[a][b+1] = 0;
-                        que.push({a, b+1});
-                    }
+                    ok = 1;
+                    break;
                 }
             }
+            if(ok)    break;
         }
+        if(!ok)    ans++;
+        data[a][b] = 1;
     }
     cout << ans;
     return 0;
