@@ -26,7 +26,7 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=f607
     sort(&cut[0], &cut[n]);//使 cut 按照切割順序排列
     for(auto i : cut)//遍歷cut, (line29-30 => l=該刀左邊的那一刀, r=該刀右邊的那一刀)
     {
-        auto l = upper_bound(begin(data), end(data), i.second);
+        auto l = data.upper_bound(i.second);
         auto r = l--;
         ans+=*r-*l;//答案加上r到l的距離
         data.insert(i.second);//將該刀加入data
