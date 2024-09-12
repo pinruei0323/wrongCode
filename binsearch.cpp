@@ -20,7 +20,7 @@ ll binarySearch(auto data, ll n, ll x)
 {
     ll l=0, r=n-1;
     if(x<data[l] || x>data[r])    return -1;
-    while(r-l>1)
+    do
     {
         ll tmp = ceil((r+l)/2.0);
         if(x<data[tmp])
@@ -34,12 +34,13 @@ ll binarySearch(auto data, ll n, ll x)
         if(x==data[r])
             return r;
     }
+    while(r-l>1);
     return -1;
 }
 
 int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
 {
-    cout << "¿é¤J®æ¦¡:\n°}¦Cªø«×  °}¦C¤º®e  ±ý·j´M­È\n¦^¶Çidx, ­Y¤£¦s¦b, ¦^¶Ç-1\n";
+    cout << "è¼¸å…¥æ ¼å¼:\né™£åˆ—é•·åº¦  é™£åˆ—å…§å®¹  æ¬²æœå°‹å€¼\nå›žå‚³idx, è‹¥ä¸å­˜åœ¨, å›žå‚³-1\n";
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
