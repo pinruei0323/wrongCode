@@ -40,16 +40,27 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
     for(int i=c-1; i>=0; i--)
     {
         tmp++;
+        auto *nowPtr = &dataB;
+        auto *nextPtr = &dataA;
         if(tmp%2)
         {
-            auto *nowPtr = &dataA;
-            auto *nextPtr = &dataB;
+            nowPtr = &dataA;
+            nextPtr = &dataB;
         }
-        if(data[i]==1)    f2(j, my)    f2(k, mx)    &nextPtr[j][k] = &nowPtr[my-j-1][k];
+        if(move[i]==1)    f2(j, my)    f2(k, mx)    (*nextPtr)[j][k] = (*nowPtr)[my-j-1][k];
         else
         {
-            
+            f2(j, my)    f2(k, mx)    (*nextPtr)[mx-k-1][j] = (*nowPtr)[j][k];
+            swap(my, mx);
         }
+    }
+    cout << my << ' ' << mx;
+    auto *ansPtr = (tmp%2?&dataB:&dataA);
+    f2(i, my)
+    {
+        cout << '\n';
+        f2(j, mx)
+            cout << (*ansPtr)[i][j] << ' ';
     }
     return 0;
 }
