@@ -45,7 +45,11 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
             auto *nowPtr = &dataA;
             auto *nextPtr = &dataB;
         }
-        if(i==1; )
+        if(data[i]==1)    f2(j, my)    f2(k, mx)    &nextPtr[j][k] = &nowPtr[my-j-1][k];
+        else
+        {
+            
+        }
     }
     return 0;
 }
