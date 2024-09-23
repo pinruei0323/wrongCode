@@ -10,7 +10,7 @@
 #define len length()
 #define elif else if
 #define mod 1000000007
-//#define debug
+#define debug
 /*
 #ifdef debug
 #endif
@@ -30,7 +30,7 @@ ll memSearch(string &s, int pos, int pre, bool limit, bool lead)
     ll sum = 0;
     f2(i, (limit?s[pos]-'0'+1:10))
     {
-        if(i==pre || (!i && !pre && !lead))
+        if((i==pre && i) || (!i && !pre && !lead))
             continue;
         sum+=memSearch(s, pos+1, i, limit&(s[pos]-'0'==i), lead&(!i));
     }
@@ -41,7 +41,7 @@ ll findAns(string s)
 {
     memset(dp, -1, sizeof(dp));
     if(s == "-1")
-        return -1;
+        return 0;
     return memSearch(s, 0, 0, 1, 1);
 }
 
@@ -52,7 +52,21 @@ int main()
     cout.tie(0);
     string l, r;
     cin >> l >> r;
-    l = to_string(stoi(l)-1);
+    if(l == "0")
+        l = "-1";
+    else
+    {
+        for(int i=l.len-1; i>=0; i--)
+        {
+            if(l[i]=='0')
+                l[i] = '9';
+            else
+            {
+                l[i]--;
+                break;
+            }
+        }
+    }
     cout << findAns(r) - findAns(l);
     #ifndef debug
     cout << '\n' << findAns(r) << ' ' << findAns(l);
