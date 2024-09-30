@@ -19,16 +19,18 @@
 */
 using namespace std;
 
-void cut(auto &l, auto &r, ll &ans)
+void cut(auto l, auto r, ll &ans)
 {
-    auto L=l++, R=r--;
-    if(l == R)    break;
-    ans+=*R-*L;
-    ll *ptrA=upper_bound(l, r, (*l+*r)/2), *ptrB=ptrA--;
-    bool aa = (ptrA!=l && (*l+*r)/2-*ptrA <= *ptrB-(*l+*r)/2)
-    
-    cut(L, (aa?ptrA:ptrB), ans);
-    cut((aa?ptrA:ptrB), R);
+    ll mid = (*r+*l)/2;
+    if(r-l>2)
+    {
+        auto tmpR = upper_bound(l+1, r-1, mid), tmpL = tmpR-1;
+        cut(l, (mid-*tmpL<*tmpR-mid?tmpL:tmpR), ans);
+        cut((mid-*tmpL<*tmpR-mid?tmpL:tmpR), r, ans);
+        ans+=(*r-*l);
+    }
+    elif(r-l==2)
+        ans+=(*r-*l);
 }
 
 int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
@@ -36,13 +38,13 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll n, m, ans=0;
+    ll n, m;
     cin >> n >> m;
-    vector <ll> data(n+2);
-    f3(i, 1, n+1)
-        cin >> data[i];
-    data[n+1] = m;
-    cut(begin(data), end(data), ans);
+    ll arr[n+2], ans=0;
+    arr[0] = 0;
+    arr[n+1] = m;
+    f3(i, 1, n+1)    cin >> arr[i];
+    cut(arr+0, &arr[n+1], ans);
     cout << ans;
     return 0;
 }
