@@ -19,18 +19,35 @@
 */
 using namespace std;
 
-void cut(auto l, auto r, ll &ans)
+ll catching(string s)
 {
-    ll mid = (*r+*l)/2;
-    if(r-l>2)
+    if(s == "f")
     {
-        auto tmpR = upper_bound(l+1, r-1, mid), tmpL = tmpR-1;
-        cut(l, (mid-*tmpL<*tmpR-mid?tmpL:tmpR), ans);
-        cut((mid-*tmpL<*tmpR-mid?tmpL:tmpR), r, ans);
-        ans+=(*r-*l);
+        cin >> s;
+        return 2*catching(s)-3;
     }
-    elif(r-l==2)
-        ans+=(*r-*l);
+    elif(s == "g")
+    {
+        ll tmp = 0;
+        cin >> s;
+        tmp+=2*catching(s);
+        cin >> s;
+        tmp+=catching(s)-7;
+        return tmp;
+    }
+    elif(s == "h")
+    {
+        ll tmp = 0;
+        cin >> s;
+        tmp+=3*catching(s);
+        cin >> s;
+        tmp-=2*catching(s);
+        cin >> s;
+        tmp+=catching(s);
+        return tmp;
+    }
+    else
+        return stol(s);
 }
 
 int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
@@ -38,13 +55,8 @@ int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll n, m;
-    cin >> n >> m;
-    ll arr[n+2], ans=0;
-    arr[0] = 0;
-    arr[n+1] = m;
-    f3(i, 1, n+1)    cin >> arr[i];
-    cut(arr+0, &arr[n+1], ans);
-    cout << ans;
+    string s;
+    cin >> s;
+    cout << catching(s);
     return 0;
 }
