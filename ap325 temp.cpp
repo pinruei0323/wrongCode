@@ -4,6 +4,8 @@
 #pragma comment(linker, "/stack:200000000")
 #define f2(i, m) for(long long i=0; i<m; i++)
 #define f3(i, n, m) for(long long i=n; i<m; i++)
+#define f2_(i, m) for(long long i=m; i>-1; i--)
+#define f3_(i, n, m) for(long long i=n; i>m; i--)
 #define ll long long
 #define pb push_back
 #define pob pop_back
@@ -19,44 +21,43 @@
 */
 using namespace std;
 
-ll catching(string s)
+ll cut(auto &data, ll l, ll r, ll level, ll &limit)
 {
-    if(s == "f")
+    if((level>limit) || (r-l+1<3))    return 0;
+    ll pre[r], suf[r], tmp=0;
+    pre[l] = 0;
+    f3(i, l+1, r)
     {
-        cin >> s;
-        return 2*catching(s)-3;
+        tmp+=data[i-1];
+        pre[i] = pre[i-1] + tmp;
     }
-    elif(s == "g")
+    suf[r] = 0;
+    tmp = 0;
+    f3_(i, r-1, l)
     {
-        ll tmp = 0;
-        cin >> s;
-        tmp+=2*catching(s);
-        cin >> s;
-        tmp+=catching(s)-7;
-        return tmp;
+        tmp+=data[i+1];
+        suf[i] = suf[i+1] + tmp;
     }
-    elif(s == "h")
+    ll minDif = abs(pre[l+1] - suf[l+1]), minIdx = l+1;
+    f3(i, l+2, r)
     {
-        ll tmp = 0;
-        cin >> s;
-        tmp+=3*catching(s);
-        cin >> s;
-        tmp-=2*catching(s);
-        cin >> s;
-        tmp+=catching(s);
-        return tmp;
+        if(abs(pre[i]-suf[i])<minDif)
+        {
+            minDif = abs(pre[i]-suf[i]);
+            minIdx = i;
+        }
     }
-    else
-        return stol(s);
+    return data[minIdx] + cut(data, l, minIdx-1, level+1, limit) + cut(data, minIdx+1, r, level+1, limit);
 }
 
-int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
+int main()    //    https://zerojudge.tw/ShowProblem?problemid=f638
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    string s;
-    cin >> s;
-    cout << catching(s);
-    return 0;
+    ll n, m;
+    cin >> n >> m;
+    vector <ll> data(n);
+    f2(i, n)    cin >> data[i];
+    cout << cut(data, 0, n-1, 1, m);
 }
