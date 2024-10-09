@@ -28,7 +28,7 @@ struct data
 };
 
 
-int main()    //    https://zerojudge.tw/ShowProblem?problemid=f638
+int main()    //    https://oj.ntucpc.org/contests/18/problems/852
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
