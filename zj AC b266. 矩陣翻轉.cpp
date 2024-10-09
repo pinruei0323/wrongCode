@@ -4,6 +4,8 @@
 #pragma comment(linker, "/stack:200000000")
 #define f2(i, m) for(long long i=0; i<m; i++)
 #define f3(i, n, m) for(long long i=n; i<m; i++)
+#define f2_(i, m) for(long long i=m; i>-1; i--)
+#define f3_(i, n, m) for(long long i=n; i>m; i--)
 #define ll long long
 #define pb push_back
 #define pob pop_back
@@ -19,48 +21,37 @@
 */
 using namespace std;
 
-int main()    //    https://zerojudge.tw/ShowProblem?problemid=c231
+int main()    //    https://zerojudge.tw/ShowProblem?problemid=f638
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll a, b, c, tmp = 0;
-    cin >> a >> b >> c;
-    ll my = a, mx = b;
-    vector <vector <ll>> dataA(max(a, b), vector <ll> (max(a, b)));
-    vector <vector <ll>> dataB(max(a, b), vector <ll> (max(a, b)));
-    bitset <10000> move;
-    f2(i, a)    f2(j, b)    cin >> dataA[i][j];
-    f2(i, c)
+    ll n;
+    cin >> n;
+    vector <ll> a(n);
+    vector <ll> b(n);
+    ll preA[n], preB[n], sumA=0, sumB=0, tmpL=0, tmpR=0, tmpSum=0;
+    f2(i, n)
     {
-        int dd;
-        cin >> dd;
-        if(dd) move[i] = 1;
+        cin >> a[i];
+        preA[i] = (i==0?0:preA[i-1]) + a[i];
+        sumA+=a[i];
     }
-    for(int i=c-1; i>=0; i--)
+    f2(i, n)    
     {
-        tmp++;
-        auto *nowPtr = &dataB;
-        auto *nextPtr = &dataA;
-        if(tmp%2)
-        {
-            nowPtr = &dataA;
-            nextPtr = &dataB;
-        }
-        if(move[i]==1)    f2(j, my)    f2(k, mx)    (*nextPtr)[j][k] = (*nowPtr)[my-j-1][k];
-        else
-        {
-            f2(j, my)    f2(k, mx)    (*nextPtr)[mx-k-1][j] = (*nowPtr)[j][k];
-            swap(my, mx);
-        }
+        cin >> b[i];
+        preB[i] = (i==0?0:preB[i-1]) + b[i];
+        sumB+=b[i];
     }
-    cout << my << ' ' << mx;
-    auto *ansPtr = (tmp%2?&dataB:&dataA);
-    f2(i, my)
+    f2(i, n)
     {
-        cout << '\n';
-        f2(j, mx)
-            cout << (*ansPtr)[i][j] << ' ';
+        f3(j, i+1, n)
+        {
+            if(sumB>sumA)
+            {
+                
+            }
+        }
     }
     return 0;
 }
