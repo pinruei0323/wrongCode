@@ -21,53 +21,40 @@
 */
 using namespace std;
 
-struct data
+struct seg
 {
-    vector <ll> cake;
-    vector <ll> pre;
-};
-
+    ll first, startIdx;
+    bool operater<(const seg &other)const
+    {
+        if(this->first != other.first)
+            return this->startIdx > other.startIdx;
+        else
+            return this->first < other.first;
+    }
+}
 
 int main()    //    https://oj.ntucpc.org/contests/18/problems/852
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll n;
+    priority_queue<seg> datA;
+    priority_queue<seg> datB;
+    ll n, tmp;
     cin >> n;
-    data a, b;
-    data *aa=&a, *bb=&b;
-    a.cake.resize(n);
-    a.pre.resize(n);
-    b.cake.resize(n);
-    b.pre.resize(n);
-    f2(i, n)
+    vector<ll> preA(n+1);
+    vector<ll> preB(n+1);
+    f3(i, 1, n+1)
     {
-        cin >> a.cake[i];
-        a.pre[i] = (i==0?0:a.pre[i-1]) + a.cake[i];
+        cin >> tmp;
+        preA[i] = preA[i-1] + tmp;
     }
-    f2(i, n)
+    f3(i, 1, n+1)
     {
-        cin >> b.cake[i];
-        b.pre[i] = (i==0?0:b.pre[i-1]) + b.cake[i];
+        cin >> tmp;
+        preB[i] = preB[i-1] + tmp;
     }
-    ll tmpL=-1, tmpR=-1, maxSum=a.pre[n-1];
-    f2(t, 2)
-    {
-        f2(l, n)
-        {
-            f3(r, l+1, n)
-            {
-                if((*bb).pre[n-1]+(((*aa).pre[r]-(l==0?0:(*aa).pre[l-1]))-((*bb).pre[r]-(l==0?0:(*bb).pre[l-1]))) > maxSum)
-                {
-                    maxSum = (*bb).pre[n-1]+(((*aa).pre[r]-(l==0?0:(*aa).pre[l-1]))-((*bb).pre[r]-(l==0?0:(*bb).pre[l-1])));
-                    tmpL = l+1;
-                    tmpR = r+1;
-                }
-            }
-        }
-        swap(aa, bb);
-    }
-    cout << maxSum << '\n' << tmpL << '\n' <<  tmpR;
+    ll maxL=-1, maxR=-1, maxV = preA[n]>preB[n]?preA[n]:preB[n];
+    f2(i, n+1)
     return 0;
 }
