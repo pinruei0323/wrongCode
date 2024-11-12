@@ -21,37 +21,25 @@
 */
 using namespace std;
 
-int main()    //    https://zerojudge.tw/ShowProblem?problemid=f638
+int main()    //    https://oj.ntucpc.org/contests/18/problems/852
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
     ll n;
-    cin >> n;
-    vector <ll> a(n);
-    vector <ll> b(n);
-    ll preA[n], preB[n], sumA=0, sumB=0, tmpL=0, tmpR=0, tmpSum=0;
-    f2(i, n)
+    while(cin >> n)
     {
-        cin >> a[i];
-        preA[i] = (i==0?0:preA[i-1]) + a[i];
-        sumA+=a[i];
-    }
-    f2(i, n)    
-    {
-        cin >> b[i];
-        preB[i] = (i==0?0:preB[i-1]) + b[i];
-        sumB+=b[i];
-    }
-    f2(i, n)
-    {
-        f3(j, i+1, n)
+        ll s=0;
+        for(int i=1, i<n+1; i++)
         {
-            if(sumB>sumA)
+            ll k = i;
+            while(k%5==0)
             {
-                
+                k/=5;
+                s++;
             }
         }
+        cout << s << '\n';
     }
     return 0;
 }
