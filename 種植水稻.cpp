@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<bits/stdc++.h>//    https://www.canva.com/design/DAGXKpVnC00/rKyYmQHAxK7oCFPrBw90dA/edit?utm_content=DAGXKpVnC00&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 #pragma GCC optimize("Ofast,unroll-loops,no-stack-protector,fast-math")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
 #pragma comment(linker, "/stack:200000000")
