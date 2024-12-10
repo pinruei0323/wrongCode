@@ -50,7 +50,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
         {
             nodePtr now = &que.front();
             ll tmpData = dat[now->row][now->col], diff;
-            if(ok && now->step>okStep)
+            if(ok && now->step>okStep || now->step>m)
             {
                 while(!que.empty())
                     que.pop();
@@ -64,11 +64,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
                 ok = 1;
                 continue;
             }
-            if(now->step+1>m)
-            {
-                que.pop();
-                continue;
-            }
+            
 
             diff = max(now->maxHigh, abs(dat[now->row+1][now->col]-tmpData));
             if(dat[now->row+1][now->col]!=0 && diff<visited[now->row+1][now->col] && diff<=m)
