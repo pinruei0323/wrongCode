@@ -54,6 +54,11 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
                 que.pop();
                 continue;
             }
+            if(now->step+1==m)
+            {
+                que.pop();
+                continue;
+            }
 
             diff = max(now->maxHigh, dat[now->row+1][now->col]-tmpData);
             if(dat[now->row+1][now->col]!=0 && diff<visited[now->row+1][now->col] && diff<=m)
