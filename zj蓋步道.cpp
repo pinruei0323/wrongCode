@@ -34,7 +34,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
     ll nn;
     cin >> nn;
     vector<vector<ll>> dat(nn+2, vector<ll> (nn+2));
-    vector<vector<ll>> visited(nn+2, vector<ll> (nn+2, 1e7));
     queue<node> que;
     f3(i, 1, nn+1)    f3(j, 1, nn+1)    cin >> dat[i][j];
     ll l=-1, r=1e6, m;
@@ -44,6 +43,8 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
         bool ok = 0;
         m = (l+r)/2;
         que.push({1, 1, 0, 0});
+        vector<vector<ll>> visited(nn+2, vector<ll> (nn+2, 1e7));
+        visited[1][1] = 0;
         while(!que.empty())
         {
             nodePtr now = &que.front();
@@ -52,6 +53,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
             {
                 p = min(p, {now->maxHigh, now->step});
                 que.pop();
+                ok = 1;
                 continue;
             }
             if(now->step+1==m)
@@ -65,7 +67,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
             {
                 que.push({now->row+1, now->col, now->step+1, diff});
                 visited[now->row+1][now->col] = diff;
-                ok = 1;
             }
 
             diff = max(now->maxHigh, dat[now->row-1][now->col]-tmpData);
@@ -73,7 +74,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
             {
                 que.push({now->row-1, now->col, now->step+1, diff});
                 visited[now->row-1][now->col] = diff;
-                ok = 1;
             }
 
             diff = max(now->maxHigh, dat[now->row][now->col+1]-tmpData);
@@ -81,7 +81,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
             {
                 que.push({now->row, now->col+1, now->step+1, diff});
                 visited[now->row][now->col+1] = diff;
-                ok = 1;
             }
 
             diff = max(now->maxHigh, dat[now->row][now->col-1]-tmpData);
@@ -89,7 +88,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
             {
                 que.push({now->row, now->col-1, now->step+1, diff});
                 visited[now->row][now->col-1] = diff;
-                ok = 1;
             }
             que.pop();
         }
