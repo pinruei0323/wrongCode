@@ -56,7 +56,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
                 ok = 1;
                 continue;
             }
-            if(now->step+1==m)
+            if(now->step+1>m)
             {
                 que.pop();
                 continue;
