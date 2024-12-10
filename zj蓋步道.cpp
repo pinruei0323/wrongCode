@@ -42,7 +42,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
     while(l+1!=r)
     {
         bool ok = 0;
-        m = l+r>>1;
+        m = (l+r)/2;
         que.push({1, 1, 0, 0});
         while(!que.empty())
         {
