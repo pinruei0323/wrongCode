@@ -50,7 +50,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
         {
             nodePtr now = &que.front();
             ll tmpData = dat[now->row][now->col], diff;
-            if(ok && now->step>okStep || now->step>m)
+            if(ok && now->step>okStep)
             {
                 while(!que.empty())
                     que.pop();
