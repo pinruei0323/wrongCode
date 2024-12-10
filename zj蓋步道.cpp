@@ -41,6 +41,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
     while(l+1!=r)
     {
         bool ok = 0;
+        ll okStep;
         m = (l+r)/2;
         que.push({1, 1, 0, 0});
         vector<vector<ll>> visited(nn+2, vector<ll> (nn+2, 1e7));
@@ -49,9 +50,16 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
         {
             nodePtr now = &que.front();
             ll tmpData = dat[now->row][now->col], diff;
+            if(ok && now->step>okStep)
+            {
+                while(!que.empty())
+                    que.pop();
+                break;
+            }
             if(now->row==nn && now->col==nn)
             {
                 p = min(p, {now->maxHigh, now->step});
+                okStep = now->step;
                 que.pop();
                 ok = 1;
                 continue;
