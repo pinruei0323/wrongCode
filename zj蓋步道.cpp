@@ -62,28 +62,28 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
                 continue;
             }
 
-            diff = max(now->maxHigh, dat[now->row+1][now->col]-tmpData);
+            diff = max(now->maxHigh, abs(dat[now->row+1][now->col]-tmpData));
             if(dat[now->row+1][now->col]!=0 && diff<visited[now->row+1][now->col] && diff<=m)
             {
                 que.push({now->row+1, now->col, now->step+1, diff});
                 visited[now->row+1][now->col] = diff;
             }
 
-            diff = max(now->maxHigh, dat[now->row-1][now->col]-tmpData);
+            diff = max(now->maxHigh, abs(dat[now->row-1][now->col]-tmpData));
             if(dat[now->row-1][now->col]!=0 && diff<visited[now->row-1][now->col] && diff<=m)
             {
                 que.push({now->row-1, now->col, now->step+1, diff});
                 visited[now->row-1][now->col] = diff;
             }
 
-            diff = max(now->maxHigh, dat[now->row][now->col+1]-tmpData);
+            diff = max(now->maxHigh, abs(dat[now->row][now->col+1]-tmpData));
             if(dat[now->row][now->col+1]!=0 && diff<visited[now->row][now->col+1] && diff<=m)
             {
                 que.push({now->row, now->col+1, now->step+1, diff});
                 visited[now->row][now->col+1] = diff;
             }
 
-            diff = max(now->maxHigh, dat[now->row][now->col-1]-tmpData);
+            diff = max(now->maxHigh, abs(dat[now->row][now->col-1]-tmpData));
             if(dat[now->row][now->col-1]!=0 && diff<visited[now->row][now->col-1] && diff<=m)
             {
                 que.push({now->row, now->col-1, now->step+1, diff});
