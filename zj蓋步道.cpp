@@ -34,7 +34,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
     ll nn;
     cin >> nn;
     vector<vector<ll>> dat(nn+2, vector<ll> (nn+2));
-    queue<node> que;
     f3(i, 1, nn+1)    f3(j, 1, nn+1)    cin >> dat[i][j];
     ll l=-1, r=1e6, m;
     pair<ll, ll> p = {1e7, 1e7};
@@ -44,6 +43,7 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
         m = (l+r)/2;
         que.push({1, 1, 0, 0});
         vector<vector<ll>> visited(nn+2, vector<ll> (nn+2, 1e7));
+        queue<node> que;
         visited[1][1] = 0;
         while(!que.empty())
         {
@@ -54,8 +54,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
             {
                 p = min(p, {now->maxHigh, now->step});
                 ok = 1;
-                while(!que.empty())
-                    que.pop();
                 break;
             }
             
