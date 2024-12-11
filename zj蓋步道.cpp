@@ -41,7 +41,6 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
     while(l+1!=r)
     {
         bool ok = 0;
-        ll okStep;
         m = (l+r)/2;
         que.push({1, 1, 0, 0});
         vector<vector<ll>> visited(nn+2, vector<ll> (nn+2, 1e7));
