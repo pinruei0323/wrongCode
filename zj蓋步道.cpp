@@ -50,19 +50,14 @@ int main()    //    https://oj.ntucpc.org/contests/18/problems/852
         {
             nodePtr now = &que.front();
             ll tmpData = dat[now->row][now->col], diff;
-            if(ok && now->step>okStep)
-            {
-                while(!que.empty())
-                    que.pop();
-                break;
-            }
+            
             if(now->row==nn && now->col==nn)
             {
                 p = min(p, {now->maxHigh, now->step});
-                okStep = now->step;
-                que.pop();
                 ok = 1;
-                continue;
+                while(!que.empty())
+                    que.pop();
+                break;
             }
             
 
